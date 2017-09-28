@@ -123,8 +123,7 @@ if __name__ == "__main__":
 ## Also OK to add comments!
 
 #########
-
-
+		
 
 
 
@@ -135,6 +134,52 @@ if __name__ == "__main__":
 
 ### Write unit tests below this line for the cards code above.
 
+class testCards(unittest.TestCase):
+	"""docstring for unittest"""
+	def testQueen(self):
+		q = Card(rank = 12)
+		self.assertEqual("Queen", str(q).split()[0])
+	def testAce(self):
+		a = Card(rank = 1)
+		self.assertEqual("Ace", str(a).split()[0])
+	def testClubs(self):
+		c = Card(suit = 1)
+		self.assertEqual("Clubs", str(c).split()[-1])
+	def testHearts(self):
+		c = Card(suit = 2)
+		self.assertEqual("Hearts", str(c).split()[-1])
+	def testSuitNames(self):
+		c = Card()
+		self.assertEqual(["Diamonds","Clubs","Hearts","Spades"], c.suit_names)
+	def testStr(self):
+		c = Card(suit = 2, rank = 7)
+		self.assertEqual("7 of Hearts", str(c))
+	def testNumCards(self):
+		d = Deck()
+		self.assertEqual(len(d.cards), 52)
+	def testPopCard(self):
+		d = Deck()
+		self.assertEqual(type(d.pop_card()), type(Card()))
+	def testPlayWar(self):
+		myTup = play_war_game(testing=True)
+		self.assertEqual(type(myTup), type(tuple()))
+	def testPlayWar2(self):
+		myTup = play_war_game(testing=True)
+		self.assertEqual(len(myTup), 3)
+	def testPlayWar3(self):
+		myTup = play_war_game(testing=True)
+		self.assertEqual(type(myTup[0]), type(str()))
+	#Tests that pop card reduces deck size by one
+	def testPopLength(self):
+		d = Deck()
+		d.pop_card()
+		self.assertEqual(51, len(d.cards))
+	#Tests that shuffle properly moves cards around by looking at card before and after
+	def testShuffle(self):
+		d = Deck()
+		card = d.cards[0]
+		d.shuffle()
+		self.assertNotEqual(d.cards[0], card)
 
 
 #############
